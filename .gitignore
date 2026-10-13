@@ -1,0 +1,14 @@
+# Basura del sistema
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# ---------------------------------------------------------------------------
+# AVISO: la ROM (rom/*.sfc) tiene copyright de Nintendo.
+# Si publicas el repositorio, subirla es redistribuirla. Para publicar de forma
+# segura, descomenta la línea de abajo y borra la línea `EJS_gameUrl = ...`
+# de index.html: así cada visitante carga su propia copia con el selector de
+# archivos que muestra EmulatorJS.
+#
+# rom/*.sfc
+# rom/*.smc

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#e52521">
+    <title>Super Mario World — Web (SNES)</title>
+    <meta name="description" content="Super Mario World (SNES) jugable en el navegador con EmulatorJS + WebAssembly.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23e52521'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='sans-serif'%3EM%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+    <header class="site-header">
+        <h1><span class="logo">M</span> Super Mario World <small>Web</small></h1>
+        <p class="tagline">El clásico de SNES, corriendo en tu navegador con WebAssembly.</p>
+    </header>
+
+    <main>
+        <section class="player-shell">
+            <div id="game" class="emulator-frame"></div>
+            <p class="hint">
+                Pulsa <strong>Start Game</strong> y haz clic dentro del juego para capturar el teclado.
+                En móvil aparecen los <strong>controles táctiles</strong> automáticamente.
+            </p>
+        </section>
+
+        <section class="info-grid">
+            <article>
+                <h2>Controles (teclado)</h2>
+                <ul class="controls">
+                    <li><span class="key">↑ ↓ ← →</span> Mover a Mario</li>
+                    <li><span class="key">Z</span> Saltar (B)</li>
+                    <li><span class="key">X</span> Correr / girar (A)</li>
+                    <li><span class="key">A</span> Y</li>
+                    <li><span class="key">S</span> X</li>
+                    <li><span class="key">Enter</span> Start (pausa)</li>
+                    <li><span class="key">V</span> Select</li>
+                    <li><span class="key">Q / E</span> L / R</li>
+                </ul>
+                <p class="muted">También funciona cualquier mando compatible (XInput).</p>
+            </article>
+
+            <article>
+                <h2>Cómo funciona</h2>
+                <p>
+                    Esta página no es una recompilación del juego: es un
+                    <strong>emulador de SNES (snes9x) compilado a WebAssembly</strong> mediante
+                    <a href="https://emulatorjs.org" target="_blank" rel="noopener">EmulatorJS</a>,
+                    que carga la ROM. El guardado usa el almacenamiento del navegador.
+                </p>
+                <p class="muted">
+                    Mete tu propio ROM en <code>rom/super-mario-world-usa.sfc</code> o cámbialo en
+                    <code>index.html</code> (variable <code>EJS_gameUrl</code>).
+                </p>
+            </article>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>
+            Proyecto de aficionado, sin ánimo de lucro y sin afiliación con Nintendo.
+            Super Mario World © Nintendo. Usa tu propia copia del juego.
+        </p>
+        <p class="muted">Hecho con EmulatorJS (GPLv3).</p>
+    </footer>
+
+    <!-- ===================== Configuración de EmulatorJS ===================== -->
+    <script>
+        EJS_player = '#game';
+
+        // Sistema: 'snes' usa el core snes9x (no requiere BIOS para SMW)
+        EJS_core = 'snes';
+
+        // ROM a cargar
+        EJS_gameUrl = 'rom/super-mario-world-usa.sfc';
+        EJS_gameName = 'Super Mario World (USA)';
+        EJS_gameID = 1;
+
+        // Archivos de EmulatorJS (CDN oficial). Para auto-hospedarlo,
+        // descomprime un release en ./data/ y cambia esto por 'data/'.
+        EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
+
+        // Aspecto
+        EJS_color = '#e52521';
+        EJS_backgroundColor = '#0b1020';
+        EJS_volume = 0.7;
+        EJS_alignStartButton = 'center';
+
+        // Idioma de la interfaz (evita el 404 de idiomas no soportados como es-CL)
+        EJS_language = 'es-ES';
+
+        // Controles y comportamiento
+        EJS_controlScheme = 'snes';
+        EJS_startOnLoaded = false; // muestra el botón "Start Game"
+
+        // Hooks opcionales (útiles para depurar)
+        EJS_onGameStart = function () { console.log('[SMW] Juego iniciado'); };
+        EJS_onExit = function () { console.log('[SMW] Emulador cerrado'); };
+    </script>
+    <script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script>
+</body>
+</html>
